@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <div class="text-center">
+            <i class="fas fa-check-circle iconoPago mb-2"></i>
+            
+        </div>
+        <div class="text-center mb-2">
+            <label class="lbMsnPago">Tu Pago ha sido realizado con exito!!</label>
+        </div>
+
+        <div class="text-center">
+            <label class="lbMsnPagoDetalle">Fecha de procesamiento : {{ date }}</label>
+        </div>
+        <div class="text-center">
+            <label class="lbMsnPagoDetalle">Valor : HNL {{ pagoDelCliente }}</label>
+        </div>
+
+
+    </div>
+
+    <div class="card-footer p-3 d-grid gap-2 bg-white">
+        <button type="button" class="btn btn-outline-primary block" (click)="regresar()">Regresar</button>
+      </div>
+</div>

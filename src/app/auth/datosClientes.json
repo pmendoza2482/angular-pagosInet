@@ -1,0 +1,17 @@
+{
+    "accountNumber": "4111111111111111",
+    "amount": 138,
+    "taxes": 18,
+    "cardHolderName": "Nombre del titular de la tarjeta",
+    "comment": "Payments.TodoPagoPay",
+    "commerceID": 339,
+    "customerName": "Nombre del cliente",
+    "cvc": "123",
+    "expirationMonth": "12",
+    "expirationYear": "34",
+    "externalReference": "3c718991-c95b-4354-b79a-13fc069e02cf",
+    "customerEmail": "Test@Dominio.com",
+    "terminalNbr": "1",
+    "currency": "HNL"
+ } 
+ 

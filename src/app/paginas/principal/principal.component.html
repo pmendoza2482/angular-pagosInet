@@ -1,0 +1,17 @@
+<app-informacion-cliente 
+    [nombreCliente] =  "clienteNombre" 
+    [clienteCuenta] = clienteCuentaNumero>
+</app-informacion-cliente>
+
+<app-saldo-cero *ngIf="!realizoPago && clienteSaldo === 0"></app-saldo-cero>
+
+<app-pago *ngIf="!realizoPago && clienteSaldo > 0" 
+    [clienteSldo] =  clienteSaldo 
+    [nombreCliente] =  "clienteNombre" 
+    [clienteCuenta] = clienteCuentaNumero 
+    (ejecutarSaldos)="PonerStatusPago( $event )">
+</app-pago>
+
+<app-pago-realizado *ngIf="realizoPago"
+    [pagoDelCliente] =  pagoDelCliente>
+</app-pago-realizado>

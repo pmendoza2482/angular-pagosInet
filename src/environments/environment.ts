@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'http://localhost:5000/api/',
+  tpUrl: 'https://preprod-api.todopago.hn/pay',
+  tpUser: '0501-9012-46995512',
+  tpPassword: '123456'
 };
 
 /*

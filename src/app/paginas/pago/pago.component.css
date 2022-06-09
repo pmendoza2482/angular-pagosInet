@@ -1,0 +1,14 @@
+.spanDiv{
+    background: white;
+    border-left: none;
+    border-right: none;
+}
+
+
+.borderDerecha{
+    border-right: none;
+}
+
+.borderIzquierda{
+    border-left: none;
+}

@@ -1,0 +1,36 @@
+<section class="Form m-0 m-md-5">
+    <div class="row no-gutters d-flex align-items-center">
+        <div class="col-md-12 px-4 pt-5">
+
+            <img src="../../../assets/logoEmpresa.jpeg" class="img-fluid" alt="">
+            <p class="fs-5 mb-1 mt-4">Ingrese su número de cliente.</p>
+
+            <form
+                autocomplete="off"
+                [formGroup]="loginForm"
+                (ngSubmit)="login()">
+                <div class="mb-3 form-row">
+
+                    <div class="input-group mb-5">
+
+                        <input type="text" class="form-control p-2"
+                            placeholder="Ingrese el numero de cuenta.." formControlName="numCuenta">
+                            <div class="input-group-prepend">
+                                <button [disabled]="this.loginForm.invalid" type="submit" class="input-group-text form-control spbusar" id="basic-addon1"
+                                >Ir</button>
+                            </div>
+                    </div>
+
+                    <div *ngIf="loginForm.get('numCuenta')?.hasError('required') && loginForm.get('numCuenta')?.touched" style="margin-top: 5px;">
+                        <span class="text-danger">El número de cuenta es <strong> requerido</strong></span>
+                    </div>
+                    <div *ngIf="loginForm.get('numCuenta')?.hasError('maxlength') && loginForm.get('numCuenta')?.touched" style="margin-top: 5px;">
+                        <span class="mda-form-msg text-danger">El número de cuenta no tiene que exceder de :<strong> 6 caracteres</strong></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
