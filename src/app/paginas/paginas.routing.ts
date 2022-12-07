@@ -12,7 +12,7 @@ const routes : Routes = [
         children: [
             { path: 'pago/:cuenta', component: PagoComponent },
             { path: 'principal/:cuenta', component: PrincipalComponent },
-            // { path: '', redirectTo: 'selecRubro', pathMatch: 'full' },
+            //{ path: '', redirectTo: 'selecRubro', pathMatch: 'full' },
         ] 
     },
 ];

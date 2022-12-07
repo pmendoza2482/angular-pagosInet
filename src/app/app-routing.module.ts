@@ -4,7 +4,7 @@ import { AuthRoutingModule } from './auth/auth.routing';
 import { PaginasRoutingModule } from './paginas/paginas.routing';
 
 const routes: Routes = [
-  { path: '**', redirectTo: 'selecRubro', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

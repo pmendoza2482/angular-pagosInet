@@ -16,18 +16,22 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class PagoComponent implements OnInit {
 
-  numeroCuenta: string = '';
+  //numeroCuenta: string = '';
   pagoForm: FormGroup;
   tpRespuesta: TodoPago | undefined;
-  tpStatus: number = 0;
-  tpToken: string = '';
-
-  pagoTotal: number = 0;
-
-  NopagarContado: boolean = false;
-  NopagarParcial: boolean = true;
-
   pagarCuota: Pagar = {};
+
+  //tpStatus: number = 0;
+  tpToken: string = '';
+  pagoTotal: number = 0;
+  NopagarParcial: boolean = true;
+  montoParcialRequerrido: boolean = false;
+  montoParcialValido: boolean = false;
+
+ // cantidadMontoParcial: number = 0;
+
+  //NopagarContado: boolean = false;
+
 
   requestTodoPagoPagar: RequestTPPagar | undefined;
 
@@ -36,8 +40,6 @@ export class PagoComponent implements OnInit {
   @Input() clienteSldo:number = 0;
 
   @Output() ejecutarSaldos: EventEmitter<number>;
-
-  //codigoPostal: ['', [ Validators.required, Validators.maxLength(20)]]
 
   constructor(private state: ActivatedRoute,
     private router: Router,
@@ -74,9 +76,13 @@ export class PagoComponent implements OnInit {
 
     console.log('contado');
 
+    this.first.reset();
+
+    this.montoParcialRequerrido = false;
+
     this.NopagarParcial = true;
 
-    this.first.reset();
+  
 
   }
 
@@ -86,8 +92,33 @@ export class PagoComponent implements OnInit {
 
     console.log('parcial');
 
+    this.montoParcialRequerrido = true;
+
     this.NopagarParcial = false;
 
+  }
+
+  onPercentChange(montoP: number) {
+
+    if(montoP > 0){
+
+      this.montoParcialRequerrido = false;
+
+      if(montoP >= this.clienteSldo){
+
+        this.montoParcialValido = true;
+      }
+      else{
+
+        this.montoParcialValido = false;
+      }
+
+    }else{
+
+      this.montoParcialRequerrido = true;
+    }
+
+    
   }
 
   async pagar(){
