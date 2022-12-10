@@ -74,15 +74,14 @@ export class PagoComponent implements OnInit {
 
     let df  = event.target;
 
-    console.log('contado');
+    //console.log('contado');
 
     this.first.reset();
 
     this.montoParcialRequerrido = false;
 
     this.NopagarParcial = true;
-
-  
+    this.montoParcialValido = false;
 
   }
 
