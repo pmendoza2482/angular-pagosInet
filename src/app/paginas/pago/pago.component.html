@@ -7,12 +7,12 @@
 
         <div class="form-check mt-2 mb-2">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked
                     (change)="marcarContado($event)">
                     <strong><label class="form-check-label colorTexto" for="flexRadioDefault1">Pago Contado</label></strong>
                 </div>
-                <div class="col-6">
+                <div class="col-7">
                     <strong><label class="colorTexto">HNL {{ clienteSldo | number:'1.2-2' }}</label></strong>
                 </div>
             </div>
@@ -20,12 +20,12 @@
 
         <div class="form-check">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
                     (change)="marcarParcial($event)">
                     <label class="form-check-label" for="flexRadioDefault2">Otro monto</label>
                 </div>
-                <div class="col-6 align-items-center">
+                <div class="col-7 align-items-center">
                     <div class="d-flex ">
                         <label class="form-label me-2"><strong>HNL</strong></label>
                         <input type="number" class="form-control p-2" [readonly]="NopagarParcial" 
@@ -91,7 +91,7 @@
                             <span class="text-danger">El mes es <strong> requerido</strong></span>
                         </div>
                         <div *ngIf="pagoForm.get('mm')?.hasError('maxlength') && pagoForm.get('mm')?.touched" style="margin-top: 1px;">
-                            <span class="text-danger">El mes no tiene que exceder de :<strong> 2 caracteres</strong></span>
+                            <span class="mda-form-msg text-danger">El mes no tiene que exceder de :<strong> 2 caracteres</strong></span>
                         </div>
 
                         <div *ngIf="pagoForm.get('aa')?.hasError('required') && pagoForm.get('aa')?.touched" style="margin-top: 1px;">
