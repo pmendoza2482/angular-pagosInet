@@ -117,7 +117,7 @@
                     <div *ngIf="pagoForm.get('cvc')?.hasError('required') && pagoForm.get('cvc')?.touched" style="margin-top: 1px;">
                         <span class="text-danger">El CVC es <strong> requerido</strong></span>
                     </div>
-                    <div *ngIf="pagoForm.get('cvc')?.hasError('maxLength') && pagoForm.get('cvc')?.touched" style="margin-top: 1px;">
+                    <div *ngIf="pagoForm.get('cvc')?.hasError('maxlength') && pagoForm.get('cvc')?.touched" style="margin-top: 1px;">
                         <span class="text-danger">El CVC no tiene que exceder de :<strong> 6 caracteres</strong></span>
                     </div>
                 </div>
