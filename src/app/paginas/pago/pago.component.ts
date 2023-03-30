@@ -8,6 +8,7 @@ import { RequestTPPagar } from 'src/app/modelo/todoPagoPagar.modelo';
 import Swal from 'sweetalert2';
 import { PagoInetRequest } from 'src/app/modelo/cliente.modelo';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-pago',
@@ -28,10 +29,11 @@ export class PagoComponent implements OnInit {
   montoParcialRequerrido: boolean = false;
   montoParcialValido: boolean = false;
 
- // cantidadMontoParcial: number = 0;
-
-  //NopagarContado: boolean = false;
-
+  nombreTarjetaRequerido: boolean = false;
+  numeroTarjetaRequerido: boolean = false;
+  mesVencimientoRequerido: boolean = false;
+  anoVencimientoRequerido: boolean = false;
+  cvcTarjetaRequerido: boolean = false;
 
   requestTodoPagoPagar: RequestTPPagar | undefined;
 
@@ -45,7 +47,8 @@ export class PagoComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private tpService: TodoPagoApiService,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService,
+    private currencyPipe:CurrencyPipe) {
 
       this.ejecutarSaldos = new EventEmitter();
 
@@ -62,10 +65,6 @@ export class PagoComponent implements OnInit {
      }
 
   ngOnInit(): void {
-
-    console.log(this.nombreCliente, this.clienteCuenta, this.clienteSldo)
-
-
   }
 
   get first(): any { return this.pagoForm.get('montoParcial'); }
@@ -89,7 +88,7 @@ export class PagoComponent implements OnInit {
 
     let df  = event.target;
 
-    console.log('parcial');
+    //console.log('parcial');
 
     this.montoParcialRequerrido = true;
 
@@ -120,11 +119,183 @@ export class PagoComponent implements OnInit {
     
   }
 
+  nombreTarjetaChange(texto: string){
+
+    if(texto === null || texto === '')
+    {
+        this.nombreTarjetaRequerido = true;
+    }else{
+
+      this.nombreTarjetaRequerido = false;
+    }
+  }
+
+  numeroTarjetaChange(texto: string){
+
+    if(texto === null || texto === '')
+    {
+        this.numeroTarjetaRequerido = true;
+    }else{
+
+      this.numeroTarjetaRequerido = false;
+    }
+  }
+
+  mesChange(numero: number){
+
+    if(numero === null || numero === 0)
+    {
+        this.mesVencimientoRequerido = true;
+    }else{
+
+      this.mesVencimientoRequerido = false;
+    }
+  }
+
+  anoChange(numero: number){
+
+    if(numero === null || numero === 0)
+    {
+        this.anoVencimientoRequerido = true;
+    }else{
+
+      this.anoVencimientoRequerido = false;
+    }
+  }
+
+  cvcChange(numero: number){
+
+    if(numero === null || numero === 0)
+    {
+        this.cvcTarjetaRequerido = true;
+    }else{
+
+      this.cvcTarjetaRequerido = false;
+    }
+  }
+
   async pagar(){
 
     this.pagoTotal = this.NopagarParcial == false ?
      this.pagoForm.get('montoParcial')?.value 
      : this.clienteSldo; 
+
+    let nombreTarjeta = this.pagoForm.get('nombreTarjeta')?.value;
+    if (nombreTarjeta === null || nombreTarjeta === ''){
+
+      this.nombreTarjetaRequerido = true;
+
+      Swal.fire(
+        'Advertencia!',
+        `El nombre de la tarjeta es requerido!`,
+        'warning'
+      )
+      return;
+
+    }else{
+
+      this.nombreTarjetaRequerido = false;
+    }
+
+    let numeroTarjeta = this.pagoForm.get('numeroTarjeta')?.value;
+    if (numeroTarjeta === null || numeroTarjeta === ''){
+
+      this.numeroTarjetaRequerido = true;
+
+      Swal.fire(
+        'Advertencia!',
+        `El número de la tarjeta es requerido!`,
+        'warning'
+      )
+      return;
+
+    }else{
+
+      this.numeroTarjetaRequerido = false;
+    }
+
+    let mesVence = this.pagoForm.get('mm')?.value || 0;
+    if (mesVence === null || mesVence === 0){
+
+      this.mesVencimientoRequerido = true;
+
+      Swal.fire(
+        'Advertencia!',
+        `El mes de vencimiento de la tarjeta es requerido!`,
+        'warning'
+      )
+      return;
+
+    }else{
+
+      this.mesVencimientoRequerido = false;
+    }
+
+    let anoVence = this.pagoForm.get('aa')?.value || 0;
+    if (anoVence === null || anoVence === 0){
+
+      this.anoVencimientoRequerido = true;
+
+      Swal.fire(
+        'Advertencia!',
+        `El año de vencimiento de la tarjeta es requerido!`,
+        'warning'
+      )
+      return;
+
+    }else{
+
+      this.anoVencimientoRequerido = false;
+    }
+
+    let cvcVence = this.pagoForm.get('cvc')?.value || 0;
+    if (cvcVence === null || cvcVence === 0){
+
+      this.cvcTarjetaRequerido = true;
+
+      Swal.fire(
+        'Advertencia!',
+        `El número cvc de la tarjeta es requerido!`,
+        'warning'
+      )
+      return;
+
+    }else{
+
+      this.cvcTarjetaRequerido = false;
+    }
+
+     if(this.NopagarParcial == false){
+
+      if(this.pagoTotal < 1){
+
+        Swal.fire(
+          'Advertencia!',
+          `El monto no puede ser menor o igual que cero!!`,
+          'warning'
+        )
+        return;
+  
+      }else if(this.pagoTotal == null){
+  
+        Swal.fire(
+          'Advertencia!',
+          `Ingrese un valor valido!!`,
+          'warning'
+        )
+        return;
+  
+      }else if(this.pagoTotal > this.clienteSldo){
+
+        Swal.fire(
+          'Advertencia!',
+          `El valor no puede ser mayor al saldo total!!`,
+          'warning'
+        )
+        return;
+      }
+      
+     }
 
         this.pagarCuota = {
           codigo: this.clienteCuenta,
@@ -138,9 +309,11 @@ export class PagoComponent implements OnInit {
     };
 
 
+    let totalPago = this.currencyPipe.transform(this.pagoTotal.toString(), ' ');
+
     Swal.fire({
       title: 'Confirmar!',
-      text: `Estas seguro que deseas realizar el pago por el valor de : Lps. ${ this.pagoTotal }?`,
+      text: `Estas seguro que deseas realizar el pago por el valor de : Lps. ${ totalPago }?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -196,7 +369,7 @@ export class PagoComponent implements OnInit {
     
     }, (error) => {
     
-      console.log(error);
+     // console.log(error);
 
     })
   }
@@ -206,9 +379,15 @@ export class PagoComponent implements OnInit {
     (await this.tpService.pagarTodoPagoApi(this.tpToken, requestTodoPagoPagar))
     .subscribe(pago => {
 
-      console.log(pago)
+   
 
+      console.log('Antes.')
       if(pago.status == 200){
+
+        this.pagarCuota.autorizacion = pago.data.transaccionID.toString();
+
+        console.log('pagar cuota todop pago.')
+        console.log(this.pagarCuota)
 
         this.PagarCuotaInet(this.pagarCuota);
 

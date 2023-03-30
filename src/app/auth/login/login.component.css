@@ -1,3 +1,5 @@
+
+
 .cuerpo{
     padding: 0;
     margin: 0;
@@ -23,4 +25,52 @@
     border: 1px solid;
     font-weight: 500;
     color: white;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .imgo{
+        position: absolute;
+        width: 100%; 
+        top:20%;
+    }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .imgo{
+        position: absolute;
+        width: 100%; 
+        top:20%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .imgo{
+        position: absolute;
+         width: 40%; 
+         top:15%;
+         left:30%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .imgo{
+        position: absolute;
+         width: 40%; 
+         top:10%;
+         left:30%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .imgo{
+        position: absolute;
+         width: 40%; 
+         top:10%;
+         left:30%;
+    }
 }

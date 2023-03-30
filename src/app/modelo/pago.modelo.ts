@@ -5,6 +5,7 @@ export interface Pagar{
     valor?: number;
     autorizacion?: string;
     documento?: string;
+    fechaTexto?: string;
     // nombreTarjeta?: string;
     // numeroTarjeta?: string;
     // mm?: string;
@@ -14,6 +15,12 @@ export interface Pagar{
 }
 
 export interface ResponsePago {
+    message?: string;
+    data: Pagar[];
+    error?: string;  
+}
+
+export interface ResponseMovimientos {
     message?: string;
     data: Pagar[];
     error?: string;  

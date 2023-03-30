@@ -3,6 +3,11 @@ export interface Cliente{
     nombre?: string;
     saldo?: number;
     corte?: number;
+    ipPublica?: string;
+    mac?: string;
+    telefono?: string;
+    email?: string;
+    status?: string;
 }
 
 export interface PagoInetRequest{

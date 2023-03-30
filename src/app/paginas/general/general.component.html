@@ -1,0 +1,109 @@
+
+<div class="row m-md-5">
+    <div class="col-md-2">
+    
+
+    </div>
+    <div class="col-md-8">
+        <div class="card p-3">
+
+            <div class="row">
+                <div class="col-md-6">
+        
+                    <div class="container mb-5">
+                        <img src="assets/logoInfinity.jpeg" class="img-fluid" alt="">
+                    </div>
+                    
+            
+                    <table class="table table-borderless m-md-3">
+                        <tbody>
+                            <tr>
+                              <td class="m-0 p-0">Cliente :</td>
+                              <td class="m-0 p-0">{{ clienteNombre }}</td>
+                            </tr>
+                            <tr>
+                                <td class="m-0 p-0">Correo Electrónico :</td>
+                                <td class="m-0 p-0">{{ clienteEmail }}</td>
+                            </tr>
+                            <tr>
+                                <td class="m-0 p-0">Teléfono :</td>
+                                <td class="m-0 p-0">{{ clienteTelefono }}</td>
+                              </tr>
+                              <tr>
+                                <td class="m-0 p-0">Saldo :</td>
+                                <td class="m-0 p-0">$ {{ clienteSaldo | number:'1.2-2' }}</td>
+                              </tr>
+                        </tbody>
+                    </table>
+            
+            
+                    <h4 class="ms-md-3">Información de Red</h4>
+            
+                    <table class="table table-borderless m-md-3">
+                        <tbody>
+                            <tr>
+                              <td class="m-0 p-0">Ipv/4 :</td>
+                              <td class="m-0 p-0">{{ clienteIPPublica }}</td>
+                            </tr>
+                            <tr>
+                                <td class="m-0 p-0">Mac Address :</td>
+                                <td class="m-0 p-0">{{ clienteMAC }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            
+                    <button type="button" class="btn btn-primary m-md-3"
+                    (click)="pagarCuota()">Pagar</button>
+            
+            
+            
+                </div>
+                <div class="col-md-6">
+            
+                    <h4><span class="badge rounded-pill mb-2 mt-5" [ngClass]="clienteStatus === 'Activo' ? 'bg-success' : 'bg-warning'">
+                        {{ clienteStatus }}
+                    </span></h4>
+            
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr style="font-size: 0.9rem;">
+                                  <th scope="col">Descripción</th>
+                                  <th scope="col">Tipo</th>
+                                  <th scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                              <tbody style="font-size: 0.9rem;" *ngFor="let mov of movimientos | paginate:{
+                                itemsPerPage: tableSize,
+                                currentPage: page,
+                                totalItems: count }; let i = index">
+                                <tr>
+                                  <td>{{ mov.descripcion }}</td>
+                                  <td>{{ mov.fechaTexto }}</td>
+                                  <td>{{ mov.valor }}</td>
+                                </tr>
+                              </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls
+                                (pageChange)="onTableDataChange($event)"
+                                previousLabel="Anterior"
+                                nextLabel="Siguiente"
+                            ></pagination-controls>
+                        </div>
+
+                    </div>
+            
+                </div>
+            </div>
+        
+        </div>
+
+    </div>
+    <div class="col-md-2">
+    
+
+    </div>
+
+</div>
+

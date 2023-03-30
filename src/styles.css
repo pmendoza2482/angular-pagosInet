@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+.component {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  body{
     background: #f5f6fa;
 }
 
@@ -9,7 +16,11 @@ body{
     box-sizing: border-box;
 }
 
-.skewed-bg{
+.colorFondo{
+    background: #0097e6;
+}
+
+/* .skewed-bg{
     background: #0097e6;
     padding: 350px 0;
     -webkit-transform: skew(0deg, -10deg);
@@ -18,7 +29,7 @@ body{
     -o-transform: skew(0deg, -10deg);
     transform: skew(0deg, -10deg);
     margin-top: -200px;
-}
+} */
 
 /* .imgo{
     position: absolute;
@@ -28,57 +39,52 @@ body{
 } */
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .imgo{
         position: absolute;
         width: 100%; 
         top:20%;
-        /* left:20px;
-        padding-right: 20px; */
-       
     }
-}
+} */
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
     .imgo{
         position: absolute;
         width: 100%; 
         top:20%;
-        /* left:20px;
-        padding-right: 20px; */
     }
-}
+} */
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
     .imgo{
         position: absolute;
          width: 40%; 
          top:15%;
          left:30%;
     }
-}
+} */
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
     .imgo{
         position: absolute;
          width: 40%; 
          top:10%;
          left:30%;
     }
-}
+} */
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 1200px) {
     .imgo{
         position: absolute;
          width: 40%; 
          top:10%;
          left:30%;
     }
-}
+} */
 
 .colorTexto{
     color: #007cbe;

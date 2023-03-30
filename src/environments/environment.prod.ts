@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: 'https://TodoPagoServices/api/',
+  url: 'https://infinityhn.net/PasarelaInet/api/',
  // url: 'https://infinityhn.net/api/',
   //url: 'http://localhost:5000/api/',
   tpUrl: 'https://preprod-api.todopago.hn/pay',

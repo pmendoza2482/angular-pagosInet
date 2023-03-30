@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
 
     if(this.loginForm.value.numCuenta !== ''){
  
-      //this.router.navigate([`/pago/${ this.loginForm.value.numCuenta }`]);    
-      this.router.navigate([`/principal/${ this.loginForm.value.numCuenta }`]);    
+     // this.router.navigate([`/principal/${ this.loginForm.value.numCuenta }`]);    
+      this.router.navigate([`/general/${ this.loginForm.value.numCuenta }`]);       
     }
   }
 

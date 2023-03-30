@@ -13,11 +13,9 @@ export class PrincipalComponent implements OnInit {
   numeroCuenta: string = '';
   saldo: number = 0;
 
-  clientes: Cliente = {};
-
   realizoPago: boolean = false;
 
-
+  clientes: Cliente = {};
   clienteNombre: string = '';
   clienteCuentaNumero: number = 0;
   clienteSaldo: number = 0;
@@ -42,7 +40,7 @@ export class PrincipalComponent implements OnInit {
 
   async ObtenerSaldoPorCliente(cuenta: number){
 
-    console.log('Llamada de metodo');
+    //console.log('Llamada de metodo');
 
     (await this.usuarioService.obtenerCreditosPorCliente(cuenta))
             .subscribe(async credi => {

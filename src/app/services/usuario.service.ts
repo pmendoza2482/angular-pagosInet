@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PagoInetRequest, ResponseCliente, ResponseLogin, ResponsePago } from '../modelo/cliente.modelo';
 import Swal from 'sweetalert2';
-import { Pagar } from '../modelo/pago.modelo';
+import { Pagar, ResponseMovimientos } from '../modelo/pago.modelo';
 
 const URL = environment.url;
 
@@ -22,6 +22,11 @@ export class UsuarioService {
   async obtenerCreditosPorCliente(clienteId: number){
 
     return this.http.get<ResponseCliente>(URL + `Pasarela/MostrarClienteSaldoPorCodigo?codigo=${clienteId}`);
+  }
+
+  async obtenerMovimientosPorCodigo(clienteId: number){
+
+    return this.http.get<ResponseMovimientos>(URL + `Pasarela/ObtenerMovimientosPorCodigo?codigo=${clienteId}`);
   }
 
   async crearPago(pago: Pagar){

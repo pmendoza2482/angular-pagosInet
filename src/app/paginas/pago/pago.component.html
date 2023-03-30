@@ -46,10 +46,11 @@
             <label class="form-label"><strong>Nombre de tarjeta</strong></label>
 
             <input type="text" class="form-control p-2"
+            (ngModelChange)="nombreTarjetaChange($event)"
                 placeholder="Nombre de tarjeta" formControlName="nombreTarjeta">
 
-            <div *ngIf="pagoForm.get('nombreTarjeta')?.hasError('required') && pagoForm.get('nombreTarjeta')?.touched" style="margin-top: 1px;">
-                <span class="text-danger">El nombre de la tarjeta es <strong> requerido</strong></span>
+            <div *ngIf="nombreTarjetaRequerido" style="margin-top: 1px;">
+                <span class="text-danger">El nombre de la tarjeta es <strong> requerido!</strong></span>
             </div>
             <div *ngIf="pagoForm.get('nombreTarjeta')?.hasError('maxlength') && pagoForm.get('nombreTarjeta')?.touched" style="margin-top: 1px;">
                 <span class="mda-form-msg text-danger">El nombre de la tarjeta no tiene que exceder de :<strong> 20 caracteres</strong></span>
@@ -60,9 +61,10 @@
 
             <label class="form-label"><strong>Número de tarjeta</strong></label>
             <input type="text" class="form-control p-2"
+            (ngModelChange)="numeroTarjetaChange($event)"
                 placeholder="0000 0000 0000 0000" formControlName="numeroTarjeta">
 
-            <div *ngIf="pagoForm.get('numeroTarjeta')?.hasError('required') && pagoForm.get('numeroTarjeta')?.touched" style="margin-top: 1px;">
+            <div *ngIf="numeroTarjetaRequerido" style="margin-top: 1px;">
                 <span class="text-danger">El número de la tarjeta es <strong> requerido</strong></span>
             </div>
             <div *ngIf="pagoForm.get('numeroTarjeta')?.hasError('maxlength') && pagoForm.get('numeroTarjeta')?.touched" style="margin-top: 1px;">
@@ -78,29 +80,24 @@
                     <label class="form-label"><strong>Fecha de vencimiento</strong></label>
 
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control p-2 borderDerecha"
-                        placeholder="MM" formControlName="mm">
+                        <input matInput class="form-control p-2 borderDerecha"
+                        (ngModelChange)="mesChange($event)"
+                        placeholder="MM" formControlName="mm" mask="00">
 
                         <span class="input-group-text spanDiv fw-light" id="basic-addon1">/</span>
 
-                        <input type="number" class="form-control p-2 borderIzquierda"
-                        placeholder="AA" formControlName="aa">
+                        <input matInput class="form-control p-2 borderIzquierda"
+                        (ngModelChange)="anoChange($event)"
+                        placeholder="AA" formControlName="aa" mask="00">
                     </div>
 
-                        <div *ngIf="pagoForm.get('mm')?.hasError('required') && pagoForm.get('mm')?.touched" style="margin-top: 1px;">
+                        <div *ngIf="mesVencimientoRequerido" style="margin-top: 1px;">
                             <span class="text-danger">El mes es <strong> requerido</strong></span>
                         </div>
-                        <div *ngIf="pagoForm.get('mm')?.hasError('maxlength') && pagoForm.get('mm')?.touched" style="margin-top: 1px;">
-                            <span class="mda-form-msg text-danger">El mes no tiene que exceder de :<strong> 2 caracteres</strong></span>
-                        </div>
 
-                        <div *ngIf="pagoForm.get('aa')?.hasError('required') && pagoForm.get('aa')?.touched" style="margin-top: 1px;">
+                        <div *ngIf="anoVencimientoRequerido" style="margin-top: 1px;">
                             <span class="text-danger">El año es <strong> requerido</strong></span>
                         </div>
-                        <div *ngIf="pagoForm.get('aa')?.hasError('maxlength') && pagoForm.get('aa')?.touched" style="margin-top: 1px;">
-                            <span class="text-danger">El año no tiene que exceder de :<strong> 2 caracteres</strong></span>
-                        </div>
-
                    
                 </div>
 
@@ -111,14 +108,12 @@
 
                     <label class="form-label"><strong>CVC</strong></label>
 
-                    <input type="number" class="form-control p-2"
-                        placeholder="CVC" formControlName="cvc">
+                    <input matInput class="form-control p-2"
+                    (ngModelChange)="cvcChange($event)"
+                        placeholder="CVC" formControlName="cvc" mask="0000">
 
-                    <div *ngIf="pagoForm.get('cvc')?.hasError('required') && pagoForm.get('cvc')?.touched" style="margin-top: 1px;">
+                    <div *ngIf="cvcTarjetaRequerido" style="margin-top: 1px;">
                         <span class="text-danger">El CVC es <strong> requerido</strong></span>
-                    </div>
-                    <div *ngIf="pagoForm.get('cvc')?.hasError('maxlength') && pagoForm.get('cvc')?.touched" style="margin-top: 1px;">
-                        <span class="text-danger">El CVC no tiene que exceder de :<strong> 6 caracteres</strong></span>
                     </div>
                 </div>
 
@@ -136,7 +131,7 @@
     </div>
 
     <div class="card-footer d-flex flex-row-reverse">
-        <button [disabled]="this.pagoForm.invalid" type="button" class="btn btn-primary"
+        <button  type="button" class="btn btn-primary"
         (click)="pagar()">Realizar Pago</button>
     </div>
 </div>

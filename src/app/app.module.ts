@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PaginasComponent } from './paginas/paginas.component';
 import { PaginasModule } from './paginas/paginas.module';
 import { AuthModule } from './auth/auth.module';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     PaginasModule,
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
