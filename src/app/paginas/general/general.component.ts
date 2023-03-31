@@ -29,7 +29,7 @@ export class GeneralComponent implements OnInit {
 
   page: number = 1;
   count: number = 0;
-  tableSize: number = 2;
+  tableSize: number = 10;
   tableSizes: any = [3, 6, 9];
 
   constructor(private router: Router,private state: ActivatedRoute, private usuarioService: UsuarioService) { }

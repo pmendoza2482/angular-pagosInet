@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { RequestTPAutenticar, ResponseTPAutenticar } from '../modelo/todoPagoAutenticar.modelo';
 import { RequestTPPagar, RespuestadeTPPagar } from '../modelo/todoPagoPagar.modelo';
+import { TodoPagoResponse } from '../modelo/voucher.modelo';
 
 const userTP = environment.tpUser;
 const passwordTP = environment.tpPassword;
@@ -48,7 +49,7 @@ export class TodoPagoApiService {
 
     //<RespuestadeTPPagar>
 
-    return this.http.post<any>(`${urlTP}/v1/direct-payment-without-register`, requestTodoPagoPagar, { headers });
+    return this.http.post<TodoPagoResponse>(`${urlTP}/v1/direct-payment-without-register`, requestTodoPagoPagar, { headers });
   }
 
 }

@@ -40,7 +40,8 @@
 @media only screen and (min-width: 600px) {
     .imgo{
         position: absolute;
-        width: 100%; 
+        width: 80%;
+        left:10%;
         top:20%;
     }
 }
@@ -49,9 +50,9 @@
 @media only screen and (min-width: 768px) {
     .imgo{
         position: absolute;
-         width: 40%; 
+         width: 50%; 
          top:15%;
-         left:30%;
+         left:20%;
     }
 }
 
@@ -61,7 +62,7 @@
         position: absolute;
          width: 40%; 
          top:10%;
-         left:30%;
+         left:28%;
     }
 }
 
@@ -69,8 +70,8 @@
 @media only screen and (min-width: 1200px) {
     .imgo{
         position: absolute;
-         width: 40%; 
+         width: 35%; 
          top:10%;
-         left:30%;
+         left:28%;
     }
 }

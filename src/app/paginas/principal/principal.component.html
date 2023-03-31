@@ -1,9 +1,9 @@
 <div class="row mt-5">
 
-    <div class="col-md-4">
+    <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4">
 
     </div> 
-    <div class="col-md-4">
+    <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
 
         <app-informacion-cliente 
         [nombreCliente] =  "clienteNombre" 
@@ -15,7 +15,8 @@
     <app-pago *ngIf="!realizoPago && clienteSaldo > 0" 
         [clienteSldo] =  clienteSaldo 
         [nombreCliente] =  "clienteNombre" 
-        [clienteCuenta] = clienteCuentaNumero 
+        [clienteCuenta] = clienteCuentaNumero
+        [estado] = clienteEstado
         (ejecutarSaldos)="PonerStatusPago( $event )">
     </app-pago>
 
@@ -24,7 +25,7 @@
     </app-pago-realizado>
 
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4">
 
     </div> 
 

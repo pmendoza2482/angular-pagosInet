@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="form-check">
+        <div *ngIf="estado === 'Activo'" class="form-check">
             <div class="row">
                 <div class="col-5">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
@@ -29,7 +29,7 @@
                     <div class="d-flex ">
                         <label class="form-label me-2"><strong>HNL</strong></label>
                         <input type="number" class="form-control p-2" [readonly]="NopagarParcial" 
-                         (ngModelChange)="onPercentChange($event)"
+                        (ngModelChange)="onPercentChange($event)"
                             placeholder="Ingrese el monto" formControlName="montoParcial">
                     </div>
                     <div *ngIf="montoParcialRequerrido" style="margin-top: 1px;">
@@ -98,7 +98,7 @@
                         <div *ngIf="anoVencimientoRequerido" style="margin-top: 1px;">
                             <span class="text-danger">El año es <strong> requerido</strong></span>
                         </div>
-                   
+                
                 </div>
 
             </div>
@@ -131,11 +131,13 @@
     </div>
 
     <div class="card-footer d-flex flex-row-reverse">
-        <button  type="button" class="btn btn-primary"
+
+
+
+        <button  type="button" class="btn btn-primary ms-2"
         (click)="pagar()">Realizar Pago</button>
+
+        <button  type="button" class="btn btn-secondary"
+        (click)="goBack()">Cancelar</button>
     </div>
 </div>
-
-
-
-

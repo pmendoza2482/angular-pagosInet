@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { PagoInetRequest } from 'src/app/modelo/cliente.modelo';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CurrencyPipe } from '@angular/common';
+import { TodoPagoResponse } from 'src/app/modelo/voucher.modelo';
 
 @Component({
   selector: 'app-pago',
@@ -21,6 +22,7 @@ export class PagoComponent implements OnInit {
   pagoForm: FormGroup;
   tpRespuesta: TodoPago | undefined;
   pagarCuota: Pagar = {};
+  transaccion: TodoPagoResponse = {};
 
   //tpStatus: number = 0;
   tpToken: string = '';
@@ -37,9 +39,10 @@ export class PagoComponent implements OnInit {
 
   requestTodoPagoPagar: RequestTPPagar | undefined;
 
+  @Input() clienteSldo:number = 0;
   @Input() nombreCliente: string = '';
   @Input() clienteCuenta: number = 0;
-  @Input() clienteSldo:number = 0;
+  @Input() estado: string = '';
 
   @Output() ejecutarSaldos: EventEmitter<number>;
 
@@ -300,14 +303,11 @@ export class PagoComponent implements OnInit {
         this.pagarCuota = {
           codigo: this.clienteCuenta,
           descripcion: 'Tarjeta Crédito',
-          tipo: this.NopagarParcial == false ? 'parcial' : 'Pago total',
-          //tipo: 'Pago parcial',
+          tipo: this.NopagarParcial == false ? 'PARCIAL' : 'PAGO',
           valor: this.pagoTotal * (-1),
           autorizacion: '',
           documento: '',
-      // codigoPostal: this.pagoForm.get('codigoPostal')?.value,
     };
-
 
     let totalPago = this.currencyPipe.transform(this.pagoTotal.toString(), ' ');
 
@@ -326,8 +326,6 @@ export class PagoComponent implements OnInit {
         await this.autenticarTodoPagoApi();
       }
     })
-
-
   }
 
   async autenticarTodoPagoApi(){
@@ -369,7 +367,11 @@ export class PagoComponent implements OnInit {
     
     }, (error) => {
     
-     // console.log(error);
+      Swal.fire(
+        'Error!',
+        `No se pudo hacer la autenticación con el proveedor de Pago, la transacción no se ejecutó : ${error}`,
+        'error'
+      )
 
     })
   }
@@ -379,15 +381,25 @@ export class PagoComponent implements OnInit {
     (await this.tpService.pagarTodoPagoApi(this.tpToken, requestTodoPagoPagar))
     .subscribe(pago => {
 
-   
+      //console.log(pago)
 
-      console.log('Antes.')
-      if(pago.status == 200){
+      this.transaccion = pago;
 
-        this.pagarCuota.autorizacion = pago.data.transaccionID.toString();
+      //console.log(this.transaccion)
 
-        console.log('pagar cuota todop pago.')
-        console.log(this.pagarCuota)
+      if(this.transaccion.status == 200){
+
+        let voucher = this.transaccion?.data?.voucher;
+        let descripcion = 'Pago con T/C ' + voucher?.find(f=> f.name === 'Tarjeta')?.value;
+
+       // console.log(voucher)
+
+        let transacciones = this.transaccion?.data?.transaccionID || 0;
+
+        this.pagarCuota.descripcion = descripcion;
+        this.pagarCuota.autorizacion = transacciones.toString();
+        this.pagarCuota.documento = transacciones.toString();
+
 
         this.PagarCuotaInet(this.pagarCuota);
 
@@ -420,7 +432,7 @@ export class PagoComponent implements OnInit {
     (await this.usuarioService.crearPago(requestTodoPagoPagar))
     .subscribe(pago => {
 
-      console.log(pago)
+     // console.log(pago)
 
       if(pago.data){
 
@@ -453,6 +465,10 @@ export class PagoComponent implements OnInit {
 
     })
 
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }
